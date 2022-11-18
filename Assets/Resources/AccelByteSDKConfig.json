@@ -1,0 +1,12 @@
+{ 
+  "Default": {
+    "Namespace": "ShooterLR",
+    "UsePlayerPrefs": true,
+    "EnableDebugLog": true,
+    "DebugLogFilter": "Log",
+    "BaseUrl": "https://shooterlr.developers.foundations.accelbyte.io",
+    "RedirectUri": "http://127.0.0.1",
+    "AppId": "",
+    "PublisherNamespace": ""
+  }
+}
