@@ -150,6 +150,7 @@ public class UserAccountManager : MonoBehaviour
         // user.LoginWithUsernameV3("testregister@gmail.com", "Default123!", OnLogin);       
         // user.LoginWithUsernameV3("testregister", "Default123!", OnLogin, false);
         user.LoginWithUsernameV3("developertest@gmail.com", "Default123!", OnLogin, false);
+        LoggedInMenu.SetActive(true);
     }
 
     /*
