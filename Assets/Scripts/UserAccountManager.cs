@@ -29,17 +29,7 @@ public class UserAccountManager : MonoBehaviour
         Instance = this;
     }
 
-    public static void OnRegister(Result<UserData> result)
-    {
-        if (result.IsError)
-        {
-            Debug.Log("Register failed:");
-        }
-        else
-        {
-            Debug.Log("Register successful.");
-        }
-    }
+    
 
     public void CreateAccount(string username, string password, string emailAddress)
     {
@@ -49,6 +39,7 @@ public class UserAccountManager : MonoBehaviour
         Debug.Log(emailAddress);
 
         DateTime currentTime = DateTime.Now;
+        DateTime dateOfBirth = new DateTime(2015, 12, 31);
 
         //var user = AccelBytePlugin.GetUser();
 
@@ -61,9 +52,57 @@ public class UserAccountManager : MonoBehaviour
         // string _dateOfBirth = currentTime;
         // user.Registerv2(_email, _username, _password, _displayName, _country, currentTime, (Result<RegisterUserResponse> Result) => { });
 
+        var user = AccelBytePlugin.GetUser();
+
+        string displayName = "Test123";
+        string country = "ID";
+        //string dateOfBirth = "1995-12-30";
+
+        //user.Registerv2(emailAddress, username, password, displayName, OnRegister, country, dateOfBirth);
+        /*
+        user.Registerv2(emailAddress, username, password, displayName, country, currentTime,(Result<RegisterUserResponse> result) => {
+            if (result.IsError)
+            {
+                Debug.Log("Register failed:");
+            }
+            else
+            {
+                Debug.Log("Register successful.");
+            }
+        });
+        */
+
+        user.Registerv2(emailAddress, username, password, displayName, country, dateOfBirth, OnRegister);
     }
 
-    [System.Obsolete]
+    private void OnRegister(Result<RegisterUserResponse> result)
+    {
+        if (result.IsError)
+        {
+            Debug.Log("Register failed:");
+        }
+        else
+        {
+            Debug.Log("Register successful.");
+        }
+    }
+
+
+    public static void OnLogin(Result result)
+    {
+        if (!result.IsError)
+        {
+            // show the login result
+            Debug.Log("Login successful");
+        }
+        else
+        {
+            Debug.Log("Login failed:" + result.Error.Message);
+            Debug.Log("Login ---:" + result.IsError);
+        }
+    }
+
+    [Obsolete]
     public void SignIn(string username, string password)
     {
         // Debug.Log("Siggn ini");
@@ -104,6 +143,13 @@ public class UserAccountManager : MonoBehaviour
 
         */
         Debug.Log("Button SignIn Clicked ------ !!!");
+
+        User user = AccelBytePlugin.GetUser();
+
+        // user.LoginWithUserName(email, password, OnLogin);
+        // user.LoginWithUsernameV3("testregister@gmail.com", "Default123!", OnLogin);       
+        // user.LoginWithUsernameV3("testregister", "Default123!", OnLogin, false);
+        user.LoginWithUsernameV3("developertest@gmail.com", "Default123!", OnLogin, false);
     }
 
     /*
